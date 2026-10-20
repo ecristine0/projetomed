@@ -1,19 +1,15 @@
 <?php
-
 session_start();
-
 require_once "funcoes.php";
-
 verificarLogin();
 
-if (isset($_GET["deletar"])) {
-
+if (isset($_POST["deletar"])) {
     deletarprescricao(
         $conexao,
-        $_GET["medicamento_id"],
-        $_GET["cuidado_id"],
-        $_GET["pessoa_id"],
-        $_GET["cuidador"]
+        $_POST["medicamento_id"],
+        $_POST["cuidado_id"],
+        $_POST["pessoa_id"],
+        $_POST["cuidador"]
     );
 
     header("Location: prescricao.php");
@@ -21,71 +17,32 @@ if (isset($_GET["deletar"])) {
 }
 
 $prescricoes = listarprescricao($conexao);
-
 require_once "cabecalho.php";
-
 ?>
 
 <!DOCTYPE html>
-
-<html lang="pt-BR">
-
+<html lang="en">
 <head>
-
     <meta charset="UTF-8">
-
-    <title>Prescrições</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prescrição</title>
 </head>
-
 <body>
+    <h1>Prescrição</h1>
 
-<h1>Prescrições</h1>
+    <form method="POST" action="prescricao.php">
 
-<?php while ($p = $prescricoes->fetch_assoc()) { ?>
+    <input type="hidden" name="medicamento_id" value="<?php echo $p['medicamento_medicamento_id']; ?>">
 
-    <div class="card">
+    <input type="hidden" name="cuidado_id" value="<?php echo $p['cuidado_cuidado_id']; ?>">
 
-        <p>
-            Frequência:
-            <?php echo $p["prescricao_frequencia"]; ?>
-        </p>
+    <input type="hidden" name="pessoa_id" value="<?php echo $p['cuidado_fk_pessoa_paciente']; ?>">
+    
+    <input type="hidden" name="cuidador" value="<?php echo $p['cuidado_fk_pessoa_cuidador']; ?>">
 
-        <p>
-            Dosagem:
-            <?php echo $p["prescricao_dosagem"]; ?>
-        </p>
-
-        <p>
-            Horário:
-            <?php echo $p["prescricao_horario_primeira_dose"]; ?>
-        </p>
-
-        <p>
-            Data:
-            <?php echo $p["prescricao_data_inicio"]; ?>
-        </p>
-
-        <p>
-            Observação:
-            <?php echo $p["prescricao_observacao"]; ?>
-        </p>
-
-        <a href="prescricao.php?deletar=1
-        &medicamento_id=<?php echo $p["medicamento_medicamento_id"]; ?>
-        &cuidado_id=<?php echo $p["cuidado_cuidado_id"]; ?>
-        &pessoa_id=<?php echo $p["cuidado_fk_pessoa_pessoa_id"]; ?>
-        &cuidador=<?php echo $p["cuidado_fk_pessoa_cuidador"]; ?>"
-        onclick="return confirm('Deseja deletar?')">
-
-            Deletar
-
-        </a>
-
-    </div>
-
-<?php } ?>
-
+    <button type="submit" name="deletar" onclick="return confirm('Deseja deletar?')">
+        Deletar
+    </button>
+</form>
 </body>
-
 </html>

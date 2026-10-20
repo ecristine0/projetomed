@@ -1,0 +1,521 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #fff;
+    color: #222;
+}
+
+.container {
+    width: 100%;
+    padding-left: 4vw;
+    padding-right: 4vw;
+}
+
+/* HEADER */
+
+/* HEADER */
+
+header {
+    width: 100%;
+    background: white;
+    border-bottom: 1px solid #ececec;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.header {
+    width: 100%;
+}
+
+.header .container {
+    width: 100%;
+    min-height: 4.5rem;
+    padding-left: 4vw;
+    padding-right: 4vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+/* LOGO */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo img {
+    display: block;
+    width: 2.625rem;
+    height: 2.625rem;
+    object-fit: contain;
+    border-radius: 30%;
+}
+
+.logo span {
+    color: #d71a2b;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+
+/* MENU */
+
+.header .menu {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.header .menu a {
+    color: #222;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.header .menu a:hover {
+    color: #ef1835;
+}
+
+
+/* BOTÕES */
+
+.btn-home,
+.btn-login {
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.btn-login {
+    background: #ef1835;
+    color: white !important;
+    padding: 0.7rem 1.2rem;
+    border-radius: 0.5rem;
+}
+
+.btn-login:hover {
+    background: #d9142d;
+}
+
+/* HERO */
+
+.hero {
+    padding: 6vw 0;
+}
+
+.hero .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5vw;
+}
+
+.texto {
+    flex: 1;
+}
+
+.texto h5 {
+    color: #ef1835;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.texto h2 {
+    font-size: 3rem;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+}
+
+.texto h2 span {
+    color: #ef1835;
+}
+
+.texto p {
+    color: #666;
+    line-height: 1.7;
+    max-width: 35rem;
+    margin-bottom: 2rem;
+}
+
+.texto button {
+    border: none;
+    background: #ef1835;
+    color: white;
+    padding: 0.9rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.texto button:hover {
+    background: #d9142d;
+}
+
+.imagem {
+    flex: 1;
+    text-align: center;
+}
+
+.imagem img {
+    width: 100%;
+    max-width: 31.25rem;
+}
+
+/* ESTATÍSTICAS */
+
+.estatisticas {
+    padding: 2.5rem 0;
+    background: #fafafa;
+}
+
+.estatisticas .container {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    gap: 2rem;
+}
+
+.estatisticas h3 {
+    color: #ef1835;
+    font-size: 2rem;
+    margin-bottom: 0.4rem;
+}
+
+.estatisticas p {
+    color: #666;
+}
+
+/* FUNCIONALIDADES */
+
+.funcionalidades {
+    padding: 5rem 0;
+    text-align: center;
+}
+
+.funcionalidades .container {
+    display: block;
+}
+
+.funcionalidades h2 {
+    font-size: 2.5rem;
+}
+
+.subtitulo {
+    color: #666;
+    margin: 0.9rem 0;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.8rem;
+    margin-top: 2.5rem;
+}
+
+.card {
+    background: white;
+    padding: 2.2rem;
+    border-radius: 1.25rem;
+    box-shadow: 0 0.6rem 1.8rem #0002;
+}
+
+.card-titulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-bottom: 0.9rem;
+}
+
+.card-titulo img {
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: cover;
+    border-radius: 0.4rem;
+    flex-shrink: 0;
+}
+
+.card-titulo h4 {
+    color: #e50914;
+    margin: 0;
+}
+
+.card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* CTA */
+
+.cta {
+    background: #ef1835;
+    color: white;
+    text-align: center;
+    padding: 4rem 1.5rem;
+}
+
+.cta h2 {
+    margin-bottom: 0;
+}
+
+.cta p {
+    margin-top: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.cta button {
+    border: none;
+    background: white;
+    border-radius: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+}
+
+.cta button a {
+    color: #ef1835;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* FOOTER */
+
+footer {
+    background: #fff;
+    border-top: 1px solid #ececec;
+}
+
+/* LOGIN */
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+    background: #fafafa;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 28rem;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.6rem 1.8rem #0002;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-header h1 {
+    color: #ef1835;
+    margin-bottom: 0.5rem;
+}
+
+.login-header p {
+    color: #666;
+}
+
+.login-logo {
+    display: none;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.login-form label {
+    font-weight: 600;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    outline: none;
+}
+
+.login-form input:focus {
+    border-color: #ef1835;
+}
+
+.login-button {
+    border: none;
+    background: #ef1835;
+    color: white;
+    padding: 0.9rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background: #d9142d;
+}
+
+.login-error {
+    color: #ef1835;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #666;
+}
+
+.login-footer a {
+    color: #ef1835;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* CADASTRO */
+
+.cadastro-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+    background: #fafafa;
+}
+
+.cadastro-container {
+    width: 100%;
+    max-width: 32rem;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.6rem 1.8rem #0002;
+}
+
+.cadastro-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cadastro-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.cadastro-form-group label {
+    font-weight: 600;
+}
+
+.cadastro-form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    outline: none;
+}
+
+.cadastro-form-group input:focus {
+    border-color: #ef1835;
+}
+
+.cadastro-button {
+    border: none;
+    background: #ef1835;
+    color: white;
+    padding: 0.9rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.cadastro-button:hover {
+    background: #d9142d;
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 48rem) {
+
+    @media (max-width: 48rem) {
+
+        .container {
+            width: 100%;
+            padding-left: 5vw;
+            padding-right: 5vw;
+        }
+
+        .hero {
+            padding: 3rem 0;
+        }
+
+        .hero .container {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .texto p {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .imagem img {
+            max-width: 25rem;
+        }
+
+        .estatisticas .container {
+            flex-direction: column;
+        }
+
+        .cards {
+            grid-template-columns: 1fr;
+        }
+
+        .funcionalidades h2 {
+            font-size: 2rem;
+        }
+
+        .texto h2 {
+            font-size: 2.3rem;
+        }
+
+        .header .menu {
+            gap: 0.8rem;
+        }
+    }
+
+    @media (max-width: 30rem) {
+
+        .header {
+            min-height: 4rem;
+        }
+
+        .header .menu a {
+            font-size: 0.9rem;
+        }
+
+        .btn-login {
+            padding: 0.6rem 0.9rem;
+        }
+
+        .login-container,
+        .cadastro-container {
+            padding: 1.5rem;
+        }
+    }
+}

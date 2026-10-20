@@ -145,19 +145,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             no mínimo uma letra maiúscula
                         </li>
 
-                        <li
-                            id="regra_numero"
-                            class="invalido"
-                        >
-                            No mínimo 1 número
-                        </li>
-
-                        <li
-                            id="regra_especial"
-                            class="invalido"
-                        >
-                            No mínimo 1 caractere especial
-                        </li>
 
                     </ul>
 

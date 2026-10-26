@@ -6,11 +6,11 @@ require_once "cabecalho.php";
 
 echo "<h2>Listar Prescrição</h2>";
 
-$prescricao = listarprescricao($conexao);
+$prescricao = listarprescricao($conexao, $pessoa_id, $cuidador);
 
 echo "<ul>";
 echo "<li>";
-echo "Medicamento: {$prescricao['medicamento_medicamento_id']}<br>";
+echo "Medicamento: {$prescricao['medicamento_medicamento_id']}<br>";  
 echo "Frequência: {$prescricao['prescricao_frequencia']}<br>";
 echo "Dosagem: {$prescricao['prescricao_dosagem']}<br>";
 echo "Horário: {$prescricao['prescricao_horario_primeira_dose']}<br>";
@@ -19,6 +19,8 @@ echo "Observação: {$prescricao['prescricao_observacao']}";
 echo "</li>";
 
 echo "</ul>";
+
+
 ?>
 
  

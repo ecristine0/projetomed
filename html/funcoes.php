@@ -221,9 +221,11 @@ function deletarprescricao($conexao, $medicamento_id, $cuidado_id, $pessoa_id, $
 }
 
 
-function listarprescricao($conexao) {
-    $sql = "SELECT medicamento_medicamento_id, cuidado_cuidado_id, cuidado_fk_pessoa_pessoa_id, cuidado_fk_pessoa_cuidador, prescricao_frequencia, prescricao_dosagem, prescricao_horario_primeira_dose, prescricao_data_inicio, prescricao_observacao FROM banco.prescricao";
-    return $conexao->query($sql);
+function listarprescricao($conexao, $pessoa_id, $cuidador ) {
+    $sql = "SELECT medicamento_medicamento_id, cuidado_fk_pessoa_cuidador, prescricao_frequencia, prescricao_dosagem, prescricao_horario_primeira_dose, prescricao_data_inicio, prescricao_observacao FROM banco.prescricao WHERE cuidado_fk_pessoa_pessoa_id= ?, cuidado_cuidado_id = ?";  
+    $stmt = $conexao->prepare($sql);
+    $stmt->bind_param("iiii", $pessoa_id, $cuidador);
+    return $stmt->execute();
 }
 
 function adicionarprescricao($conexao, $medicamento_id, $cuidado_id, $pessoa_id, $cuidador, $frequencia, $dosagem, $horario_primeira_dose, $data_inicio, $observacao){

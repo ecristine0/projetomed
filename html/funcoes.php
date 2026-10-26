@@ -206,9 +206,9 @@ function deletaridoso($conexao, $id)
 //prescrição
 
 function atualizaprescricao($conexao, $medicamento_id, $cuidado_id, $pessoa_id, $cuidador, $frequencia, $dosagem, $horario_primeira_dose, $data_inicio, $observacao) {
-$sql = "UPDATE banco.prescricao SET prescricao_frequencia = ?, prescricao_dosagem = ?, prescricao_horario_primeira_dose = ?, prescricao_data_inicio = ?, prescricao_observacao = ?, WHERE medicamento_medicamento_id = ? AND cuidado_cuidado_id = ? AND cuidado_fk_pessoa_pessoa_id = ? AND cuidado_fk_pessoa_cuidador = ?";
+$sql = "UPDATE banco.prescricao SET prescricao_frequencia = ?, prescricao_dosagem = ?, prescricao_horario_primeira_dose = ?, prescricao_data_inicio = ?, prescricao_observacao = ? WHERE medicamento_medicamento_id = ? AND cuidado_cuidado_id = ? AND cuidado_fk_pessoa_pessoa_id = ? AND cuidado_fk_pessoa_cuidador = ?";
     $stmt = $conexao->prepare($sql);
-$stmt->bind_param("idsssiiii", $frequencia, $dosagem, $horario_primeira_dose, $data_inicio, $observacao, $medicamento_id, $cuidado_id, $pessoa_id, $cuidador );
+$stmt->bind_param("sdsssiiii",$frequencia, $dosagem, $horario_primeira_dose, $data_inicio, $observacao, $medicamento_id, $cuidado_id, $pessoa_id, $cuidador );
     return $stmt->execute();
 }
 

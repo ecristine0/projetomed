@@ -201,13 +201,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             document.getElementById('regra_maiuscula');
 
 
-        const regranumero =
-            document.getElementById('regra_numero');
-
-
-        const regraespecial =
-            document.getElementById('regra_especial');
-
 
         function validarRegra(valor, regra) {
 
@@ -238,21 +231,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 /[A-Z]/.test(campo_senha.value);
 
 
-            const numero =
-                /[0-9]/.test(campo_senha.value);
-
-
-            const especial =
-                /[!@#$%^&*()-+]/.test(campo_senha.value);
-
 
             validarRegra(quantidade, regraquantidade);
 
             validarRegra(maiusculo,regramaiusculo);
 
-            validarRegra(numero, regranumero);
-
-            validarRegra(especial, regraespecial);
 
         });
 

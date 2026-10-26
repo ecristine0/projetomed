@@ -256,13 +256,6 @@
             document.getElementById('regra_maiuscula');
 
 
-        const regranumero =
-            document.getElementById('regra_numero');
-
-
-        const regraespecial =
-            document.getElementById('regra_especial');
-
 
         function validarRegra(valor, regra) {
 
@@ -305,11 +298,6 @@
 
             validarRegra(maiusculo, regramaiusculo);
 
-            validarRegra(numero, regranumero);
-
-
-            validarRegra(especial, regraespecial);
-        
         });
 
     </script>

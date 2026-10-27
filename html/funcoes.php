@@ -3,54 +3,54 @@ require_once "conexao.php";
 
 //login
 function verificarLogin()
-    {
-        if (!isset($_SESSION['pessoa'])) {
-            header("Location: login.php");
-            exit;
-        }
-    }
-
-    function logout()
-    {
-
-        session_destroy();
-
+{
+    if (!isset($_SESSION['pessoa'])) {
         header("Location: login.php");
         exit;
     }
+}
 
-    function login($conexao, $email, $senha)
-    {
-        $sql = "SELECT * FROM banco.pessoa 
+function logout()
+{
+
+    session_destroy();
+
+    header("Location: login.php");
+    exit;
+}
+
+function login($conexao, $email, $senha)
+{
+    $sql = "SELECT * FROM banco.pessoa 
                 WHERE pessoa_email = ? AND pessoa_senha = ?";
 
-        $stmt = $conexao->prepare($sql);
+    $stmt = $conexao->prepare($sql);
 
-        if (!$stmt) {
-            return "erro";
-        }
-
-        $stmt->bind_param("ss", $email, $senha);
-
-        if (!$stmt->execute()) {
-            return "erro";
-        }
-
-        $resultado = $stmt->get_result();
-
-        if ($resultado->num_rows > 0) {
-
-            $pessoa = $resultado->fetch_assoc();
-
-            $_SESSION['pessoa'] = $pessoa['pessoa_nome'];
-            $_SESSION['id'] = $pessoa['pessoa_id'];
-            $_SESSION['tipo'] = $pessoa['pessoa_tipo'];
-
-            return true;
-        }
-
-        return false;
+    if (!$stmt) {
+        return "erro";
     }
+
+    $stmt->bind_param("ss", $email, $senha);
+
+    if (!$stmt->execute()) {
+        return "erro";
+    }
+
+    $resultado = $stmt->get_result();
+
+    if ($resultado->num_rows > 0) {
+
+        $pessoa = $resultado->fetch_assoc();
+
+        $_SESSION['pessoa'] = $pessoa['pessoa_nome'];
+        $_SESSION['id'] = $pessoa['pessoa_id'];
+        $_SESSION['tipo'] = $pessoa['pessoa_tipo'];
+
+        return true;
+    }
+
+    return false;
+}
 
 
 //pessoa
@@ -92,10 +92,10 @@ function inserirmedicamento($conexao, $nome, $laboratorio, $categoria, $observac
 
 function buscarmedicamentoid($conexao, $id)
 {
-$sql = "SELECT * FROM banco.medicamento WHERE medicamento_id=?";
-$stmt = $conexao->prepare($sql);
- $stmt->bind_param("i", $id);
-$stmt->execute();
+    $sql = "SELECT * FROM banco.medicamento WHERE medicamento_id=?";
+    $stmt = $conexao->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
 
     return $stmt->get_result();
 }
@@ -205,15 +205,17 @@ function deletaridoso($conexao, $id)
 
 //prescrição
 
-function atualizaprescricao($conexao, $medicamento_id, $cuidado_id, $pessoa_id, $cuidador, $frequencia, $dosagem, $horario_primeira_dose, $data_inicio, $observacao) {
-$sql = "UPDATE banco.prescricao SET prescricao_frequencia = ?, prescricao_dosagem = ?, prescricao_horario_primeira_dose = ?, prescricao_data_inicio = ?, prescricao_observacao = ? WHERE medicamento_medicamento_id = ? AND cuidado_cuidado_id = ? AND cuidado_fk_pessoa_pessoa_id = ? AND cuidado_fk_pessoa_cuidador = ?";
+function atualizaprescricao($conexao, $medicamento_id, $cuidado_id, $pessoa_id, $cuidador, $frequencia, $dosagem, $horario_primeira_dose, $data_inicio, $observacao)
+{
+    $sql = "UPDATE banco.prescricao SET prescricao_frequencia = ?, prescricao_dosagem = ?, prescricao_horario_primeira_dose = ?, prescricao_data_inicio = ?, prescricao_observacao = ? WHERE medicamento_medicamento_id = ? AND cuidado_cuidado_id = ? AND cuidado_fk_pessoa_pessoa_id = ? AND cuidado_fk_pessoa_cuidador = ?";
     $stmt = $conexao->prepare($sql);
-$stmt->bind_param("sdsssiiii",$frequencia, $dosagem, $horario_primeira_dose, $data_inicio, $observacao, $medicamento_id, $cuidado_id, $pessoa_id, $cuidador );
+    $stmt->bind_param("sdsssiiii", $frequencia, $dosagem, $horario_primeira_dose, $data_inicio, $observacao, $medicamento_id, $cuidado_id, $pessoa_id, $cuidador);
     return $stmt->execute();
 }
 
 
-function deletarprescricao($conexao, $medicamento_id, $cuidado_id, $pessoa_id, $cuidador) {
+function deletarprescricao($conexao, $medicamento_id, $cuidado_id, $pessoa_id, $cuidador)
+{
     $sql = "DELETE FROM banco.prescricao WHERE medicamento_medicamento_id = ? AND cuidado_cuidado_id = ? AND cuidado_fk_pessoa_pessoa_id = ? AND cuidado_fk_pessoa_cuidador = ?";
     $stmt = $conexao->prepare($sql);
     $stmt->bind_param("iiii", $medicamento_id, $cuidado_id, $pessoa_id, $cuidador);
@@ -221,21 +223,30 @@ function deletarprescricao($conexao, $medicamento_id, $cuidado_id, $pessoa_id, $
 }
 
 
-function listarprescricao($conexao, $pessoa_id, $cuidador ) {
-    $sql = "SELECT medicamento_medicamento_id, cuidado_fk_pessoa_cuidador, prescricao_frequencia, prescricao_dosagem, prescricao_horario_primeira_dose, prescricao_data_inicio, prescricao_observacao FROM banco.prescricao WHERE cuidado_fk_pessoa_pessoa_id= ?, cuidado_cuidado_id = ?";  
-    $stmt = $conexao->prepare($sql);
-    $stmt->bind_param("iiii", $pessoa_id, $cuidador);
-    return $stmt->execute();
+
+function listarPrescricoes($conexao)
+{
+    $sql = "SELECT prescricao.medicamento_medicamento_id, prescricao.cuidado_cuidado_id,
+                prescricao.cuidado_fk_pessoa_paciente, prescricao.cuidado_fk_pessoa_cuidador, prescricao.prescricao_frequencia, prescricao.prescricao_dosagem, prescricao.prescricao_horario_primeira_dose, prescricao.prescricao_data_inicio, prescricao.prescricao_observacao, prescricao.prescricao_tomada, medicamento.medicamento_nome, cuidado.cuidado_nome, pessoa.pessoa_nome AS nome_cuidador, paciente.pessoa_nome AS nome_paciente FROM prescricao INNER JOIN medicamento ON prescricao.medicamento_medicamento_id = medicamento.medicamento_id INNER JOIN cuidado ON prescricao.cuidado_cuidado_id = cuidado.cuidado_id AND prescricao.cuidado_fk_pessoa_paciente = cuidado.fk_pessoa_paciente
+                AND prescricao.cuidado_fk_pessoa_cuidador = cuidado.fk_pessoa_cuidador INNER JOIN pessoa ON cuidado.fk_pessoa_cuidador = pessoa. pessoa_id INNER JOIN pessoa AS paciente ON cuidado.fk_pessoa_paciente = paciente.pessoa_id";
+
+    $consulta = $conexao->prepare($sql);
+    $consulta->execute();
+    return $consulta->fetchAll();
+
 }
 
-function adicionarprescricao($conexao, $medicamento_id, $cuidado_id, $pessoa_id, $cuidador, $frequencia, $dosagem, $horario_primeira_dose, $data_inicio, $observacao){
+
+function adicionarprescricao($conexao, $medicamento_id, $cuidado_id, $pessoa_id, $cuidador, $frequencia, $dosagem, $horario_primeira_dose, $data_inicio, $observacao)
+{
     $sql = "INSERT INTO banco.prescricao (medicamento_medicamento_id, cuidado_cuidado_id, cuidado_fk_pessoa_pessoa_id, cuidado_fk_pessoa_cuidador, prescricao_frequencia, prescricao_dosagem, prescricao_horario_primeira_dose, prescricao_data_inicio, prescricao_observacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conexao->prepare($sql);
     $stmt->bind_param("iiiidisss", $medicamento_id, $cuidado_id, $pessoa_id, $cuidador, $frequencia, $dosagem, $horario_primeira_dose, $data_inicio, $observacao);
     return $stmt->execute();
 }
 
-function marcarprescricao($conexao, $medicamento_id, $cuidado_id, $pessoa_id, $cuidador, $tomou){
+function marcarprescricao($conexao, $medicamento_id, $cuidado_id, $pessoa_id, $cuidador, $tomou)
+{
     $sql = "UPDATE banco.prescricao SET prescricao_tomada = ? WHERE medicamento_medicamento_id = ? AND cuidado_cuidado_id = ? AND cuidado_fk_pessoa_pessoa_id = ? AND cuidado_fk_pessoa_cuidador = ?";
     $stmt = $conexao->prepare($sql);
     $stmt->bind_param("iiiii", $tomou, $medicamento_id, $cuidado_id, $pessoa_id, $cuidador);

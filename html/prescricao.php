@@ -6,21 +6,32 @@ require_once "cabecalho.php";
 
 echo "<h2>Listar Prescrição</h2>";
 
-$prescricao = listarprescricao($conexao, $pessoa_id, $cuidador);
+$prescricoes = listarPrescricoes($conexao);
 
-echo "<ul>";
-echo "<li>";
-echo "Medicamento: {$prescricao['medicamento_medicamento_id']}<br>";  
-echo "Frequência: {$prescricao['prescricao_frequencia']}<br>";
-echo "Dosagem: {$prescricao['prescricao_dosagem']}<br>";
-echo "Horário: {$prescricao['prescricao_horario_primeira_dose']}<br>";
-echo "Data de início: {$prescricao['prescricao_data_inicio']}<br>";
-echo "Observação: {$prescricao['prescricao_observacao']}";
-echo "</li>";
+foreach ($prescricoes as $prescricao) {
+    echo "Medicamento: " .
+        htmlspecialchars($prescricao['medicamento_nome']) . "<br>";
 
-echo "</ul>";
+    echo "Cuidado: " .
+        htmlspecialchars($prescricao['cuidado_nome']) . "<br>";
 
+    echo "Cuidador: " .
+        htmlspecialchars($prescricao['nome_cuidador']) . "<br>";
 
+    echo "Paciente: " .
+        htmlspecialchars($prescricao['nome_paciente']) . "<br>";
+
+    echo "Dosagem: " .
+        htmlspecialchars($prescricao['prescricao_dosagem']) . "<br>";
+
+    echo "Frequência: " .
+        htmlspecialchars($prescricao['prescricao_frequencia']) . "<br>";
+
+    echo "Observação: " .
+        htmlspecialchars($prescricao['prescricao_observacao']) . "<br>";
+
+    echo "<hr>";
+}
 ?>
 
  

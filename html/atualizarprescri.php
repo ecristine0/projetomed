@@ -38,7 +38,7 @@ if (isset($_POST['atualizar'])) {
 </head>
 <body>
     
-    <form method="POST" action="prescrição.php" enctype="multipart/form-data">    
+    <form method="POST" action="prescricao.php" enctype="multipart/form-data">    
 
     <label>Medicamento:</label>
     <input type="number" name="medicamento_medicamento_id" required> <br><br>

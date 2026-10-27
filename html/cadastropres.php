@@ -1,30 +1,41 @@
-
 <?php
+session_start();
+require_once 'funcoes.php';
+verificarLogin();
+require_once "cabecalho.php";
+
 echo "<h2>Adicionar Prescrição</h2>";
 
 if (isset($_POST['adicionar'])) {
-
-    $medicamento_id = $_POST['medicamento_medicamento_id'];
-    $cuidado_id = $_POST['cuidado_cuidado_id'];
-    $pessoa_id = $_POST['pessoa_id'];
-    $cuidador = $_POST['cuidador'];
-    $frequencia = $_POST['prescricao_frequencia'];
-    $dosagem = $_POST['prescricao_dosagem'];
-    $horario_primeira_dose = $_POST['prescricao_horario_primeira_dose'];
-    $data_inicio = $_POST['prescricao_data_inicio'];
-    $observacao = $_POST['prescricao_observacao'];
-
-    if (adicionarprescricao($conexao, $medicamento_id, $cuidado_id, $pessoa_id, $cuidador, $frequencia, $dosagem, $horario_primeira_dose,$data_inicio, $observacao )) {
-        header("Location: cuidado.php?sucesso=1");
+    if (adicionarprescricao(
+        $conexao,
+        $_POST['medicamento_medicamento_id'],
+        $_POST['cuidado_cuidado_id'],
+        $_POST['pessoa_id'],
+        $_POST['cuidador'],
+        $_POST['prescricao_frequencia'],
+        $_POST['prescricao_dosagem'],
+        $_POST['prescricao_horario_primeira_dose'],
+        $_POST['prescricao_data_inicio'],
+        $_POST['prescricao_observacao']
+    )) {
+        header("Location: prescrição.php");
         exit;
-
-    } else {
-        echo "Erro ao adicionar a prescrição.";
     }
+
+    echo "Erro ao adicionar a prescrição.";
 }
 ?>
 
-<form method="POST">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro prescrição</title>
+</head>
+<body>
+    <form method="POST">
 
     <label>Medicamento:</label>
     <input type="number" name="medicamento_medicamento_id" required> <br><br>
@@ -56,3 +67,6 @@ if (isset($_POST['adicionar'])) {
     <button type="submit" name="adicionar">Adicionar Prescrição</button>
 
 </form>
+
+</body>
+</html>

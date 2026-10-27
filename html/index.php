@@ -57,7 +57,9 @@
     <div class="estatisticas">
 
         <div class="container">
-
+<a href="atualizarprescri.php">Atualizar</a>
+<a href="cadastropres.php">CADASTRO</a>
+<a href="deletarpres.php">Deletar</a>
             <div>
                 <h3>98%</h3>
                 <p>Taxa de Adesão</p>

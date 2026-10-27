@@ -4,7 +4,7 @@ require_once "conexao.php";
 //login
 function verificarLogin()
 {
-    if (!isset($_SESSION['pessoa'])) {
+    if (!isset($_SESSION['usuario_id'])) {
         header("Location: login.php");
         exit;
     }
@@ -230,19 +230,47 @@ function listarPrescricoes($conexao)
                 prescricao.cuidado_fk_pessoa_paciente, prescricao.cuidado_fk_pessoa_cuidador, prescricao.prescricao_frequencia, prescricao.prescricao_dosagem, prescricao.prescricao_horario_primeira_dose, prescricao.prescricao_data_inicio, prescricao.prescricao_observacao, prescricao.prescricao_tomada, medicamento.medicamento_nome, cuidado.cuidado_nome, pessoa.pessoa_nome AS nome_cuidador, paciente.pessoa_nome AS nome_paciente FROM prescricao INNER JOIN medicamento ON prescricao.medicamento_medicamento_id = medicamento.medicamento_id INNER JOIN cuidado ON prescricao.cuidado_cuidado_id = cuidado.cuidado_id AND prescricao.cuidado_fk_pessoa_paciente = cuidado.fk_pessoa_paciente
                 AND prescricao.cuidado_fk_pessoa_cuidador = cuidado.fk_pessoa_cuidador INNER JOIN pessoa ON cuidado.fk_pessoa_cuidador = pessoa. pessoa_id INNER JOIN pessoa AS paciente ON cuidado.fk_pessoa_paciente = paciente.pessoa_id";
 
-    $consulta = $conexao->prepare($sql);
-    $consulta->execute();
-    return $consulta->fetchAll();
-
+    $stmt = $conexao->prepare($sql);
+    $stmt->execute();
+    return $stmt->get_result();
 }
 
 
-function adicionarprescricao($conexao, $medicamento_id, $cuidado_id, $pessoa_id, $cuidador, $frequencia, $dosagem, $horario_primeira_dose, $data_inicio, $observacao)
+function adicionarprescricao($conexao, $medicamento_id, $cuidado_id, $paciente, $cuidador, $frequencia, $dosagem, $horario_primeira_dose, $data_inicio, $observacao)
 {
-    $sql = "INSERT INTO banco.prescricao (medicamento_medicamento_id, cuidado_cuidado_id, cuidado_fk_pessoa_pessoa_id, cuidado_fk_pessoa_cuidador, prescricao_frequencia, prescricao_dosagem, prescricao_horario_primeira_dose, prescricao_data_inicio, prescricao_observacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO banco.prescricao (
+                medicamento_medicamento_id,
+                cuidado_cuidado_id,
+                cuidado_fk_pessoa_paciente,
+                cuidado_fk_pessoa_cuidador,
+                prescricao_frequencia,
+                prescricao_dosagem,
+                prescricao_horario_primeira_dose,
+                prescricao_data_inicio,
+                prescricao_observacao
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
     $stmt = $conexao->prepare($sql);
-    $stmt->bind_param("iiiidisss", $medicamento_id, $cuidado_id, $pessoa_id, $cuidador, $frequencia, $dosagem, $horario_primeira_dose, $data_inicio, $observacao);
-    return $stmt->execute();
+
+    if (!$stmt) {
+        die("Erro ao preparar: " . $conexao->error);
+    }
+
+    $stmt->bind_param(
+        "iiiisdsss",
+        $medicamento_id,
+        $cuidado_id,
+        $paciente,
+        $cuidador,
+        $frequencia,
+        $dosagem,
+        $horario_primeira_dose,
+        $data_inicio,
+        $observacao
+    );
+
+       return $stmt->get_result();
+
 }
 
 function marcarprescricao($conexao, $medicamento_id, $cuidado_id, $pessoa_id, $cuidador, $tomou)

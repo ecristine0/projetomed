@@ -1,9 +1,8 @@
-
 <?php
 session_start();
 require_once 'funcoes.php';
 verificarLogin();
-require_once "cabecalho.php";
+require_once 'cabecalho.php';
 
 echo "<h2>Deletar Prescrição</h2>";
 

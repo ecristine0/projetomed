@@ -1,20 +1,48 @@
 -- -----------------------------------------------------
 -- Inserindo pessoas (pacientes e cuidadores)
 -- -----------------------------------------------------
-INSERT INTO banco.pessoa (pessoa_nome, pessoa_email, pessoa_senha, pessoa_tipo, pessoa_data_nascimento, pessoa_peso, pessoa_altura) VALUES
-('João Silva', 'joao@email.com', 'senha123', 'Paciente', '1955-08-20', 70, 1.70),
-('Maria Oliveira', 'maria@email.com', 'senha123', 'Paciente', '1958-02-15', 65, 1.60),
-('Carlos Souza', 'carlos@email.com', 'senha123', 'Paciente', '1948-12-01', 80, 1.75),
-('Ana Paula', 'ana@email.com', 'senha123', 'Cuidador', '1980-03-10', 60, 1.65),
-('Ricardo Lima', 'ricardo@email.com', 'senha123', 'Cuidador', '1975-07-22', 75, 1.80);
+INSERT INTO banco.pessoa
+(pessoa_nome, pessoa_email, pessoa_senha, pessoa_tipo,
+ pessoa_data_nascimento, pessoa_peso, pessoa_altura)
+VALUES
+('Lucas Ferreira', 'lucas@email.com', 'senha123', 'cuidador', '1985-03-12', 78.0, 1.80),
+('Beatriz Almeida', 'beatriz@email.com', 'senha123', 'paciente', '1949-06-25', 63.0, 1.62),
+('Roberto Lima', 'roberto@email.com', 'senha123', 'paciente', '1952-09-14', 72.0, 1.70),
+('Fernanda Rocha', 'fernanda@email.com', 'senha123', 'cuidador', '1990-01-08', 65.0, 1.67),
+('Marcos Pereira', 'marcos@email.com', 'senha123', 'paciente', '1950-04-17', 70.0, 1.72),
+('Juliana Martins', 'juliana@email.com', 'senha123', 'cuidador', '1988-07-21', 60.0, 1.65),
+('Antônio Ribeiro', 'antonio@email.com', 'senha123', 'paciente', '1947-11-30', 67.0, 1.68),
+('Camila Barbosa', 'camila@email.com', 'senha123', 'cuidador', '1992-02-19', 58.0, 1.63),
+('Helena Cardoso', 'helena@email.com', 'senha123', 'paciente', '1954-05-09', 61.0, 1.59),
+('Rafael Gomes', 'rafael@email.com', 'senha123', 'cuidador', '1983-10-11', 82.0, 1.82),
+('Sônia Mendes', 'sonia@email.com', 'senha123', 'paciente', '1946-08-16', 64.0, 1.60),
+('Paulo Carvalho', 'paulo@email.com', 'senha123', 'cuidador', '1987-12-04', 76.0, 1.76),
+('Teresa Nunes', 'teresa@email.com', 'senha123', 'paciente', '1951-03-23', 59.0, 1.57),
+('Gabriel Costa', 'gabriel@email.com', 'senha123', 'cuidador', '1991-09-07', 74.0, 1.78),
+('Lourdes Dias', 'lourdes@email.com', 'senha123', 'paciente', '1945-01-27', 56.0, 1.54);
 
 -- -----------------------------------------------------
 -- Inserindo cuidados (vinculando cuidador e paciente)
 -- -----------------------------------------------------
-INSERT INTO banco.cuidado (cuidado_nome, cuidado_data_nas, cuidado_foto, fk_pessoa_cuidador, fk_pessoa_paciente) VALUES
-('Cuidado João', '1955-08-20', 'foto_joao.jpg', 4, 1),
-('Cuidado Maria', '1958-02-15', 'foto_maria.jpg', 4, 2),
-('Cuidado Carlos', '1948-12-01', 'foto_carlos.jpg', 5, 3);
+INSERT INTO banco.cuidado
+(cuidado_nome, cuidado_data_nas, cuidado_foto,
+ fk_pessoa_cuidador, fk_pessoa_paciente)
+VALUES
+('Cuidado Beatriz', '1949-06-25', 'beatriz.jpg', 6, 7),
+('Cuidado Roberto', '1952-09-14', 'roberto.jpg', 6, 8),
+('Cuidado Marcos', '1950-04-17', 'marcos.jpg', 9, 10),
+('Cuidado Antônio', '1947-11-30', 'antonio.jpg', 11, 12),
+('Cuidado Helena', '1954-05-09', 'helena.jpg', 13, 14),
+('Cuidado Sônia', '1946-08-16', 'sonia.jpg', 15, 16),
+('Cuidado Teresa', '1951-03-23', 'teresa.jpg', 17, 18),
+('Cuidado Lourdes', '1945-01-27', 'lourdes.jpg', 19, 20),
+('Cuidado João adicional', '1955-08-20', 'joao2.jpg', 6, 2),
+('Cuidado Maria adicional', '1958-02-15', 'maria2.jpg', 9, 3),
+('Cuidado Ana adicional', '1948-12-01', 'ana2.jpg', 11, 5),
+('Cuidado paciente Beatriz 2', '1949-06-25', 'beatriz2.jpg', 13, 7),
+('Cuidado paciente Roberto 2', '1952-09-14', 'roberto2.jpg', 15, 8),
+('Cuidado paciente Helena 2', '1954-05-09', 'helena2.jpg', 17, 14),
+('Cuidado paciente Lourdes 2', '1945-01-27', 'lourdes2.jpg', 19, 20);
 
 -- -----------------------------------------------------
 -- Inserindo medicamentos
@@ -98,11 +126,43 @@ VALUES
 
 -- Olhos
 ('Lubrificante ocular', 'lubrificante-ocular.jpg', 'Genérico', 'Olhos', 'Utilizado para aliviar sintomas relacionados ao ressecamento ocular.');
+
 -- -----------------------------------------------------
 -- Inserindo prescrições (vinculando medicamento e cuidado)
 -- -----------------------------------------------------
-INSERT INTO banco.prescricao (medicamento_medicamento_id, cuidado_cuidado_id, cuidado_fk_pessoa_pessoa_id, cuidado_fk_pessoa_cuidador, prescricao_frequencia, prescricao_dosagem, prescricao_horario_primeira_dose, prescricao_data_inicio, prescricao_observacao) VALUES
-(1, 1, 1, 4, 3, 500, '2026-05-11 08:00:00', '2026-05-11', 'Tomar após café da manhã'),
-(2, 1, 1, 4, 2, 400, '2026-05-11 12:00:00', '2026-05-11', 'Tomar após almoço'),
-(3, 2, 2, 4, 3, 500, '2026-05-11 08:00:00', '2026-05-11', 'Completar o ciclo'),
-(4, 3, 3, 5, 1, 20, '2026-05-11 09:00:00', '2026-05-11', 'Tomar pela manhã');
+INSERT INTO banco.prescricao
+(
+    medicamento_medicamento_id,
+    cuidado_cuidado_id,
+    cuidado_fk_pessoa_paciente,
+    cuidado_fk_pessoa_cuidador,
+    prescricao_frequencia,
+    prescricao_dosagem,
+    prescricao_horario_primeira_dose,
+    prescricao_data_inicio,
+    prescricao_observacao,
+    prescricao_tomada
+)
+SELECT
+    m.medicamento_id,
+    c.cuidado_id,
+    c.fk_pessoa_paciente,
+    c.fk_pessoa_cuidador,
+    8,
+    1.0,
+    '2026-10-27 08:00:00',
+    '2026-10-27',
+    'Prescrição de teste',
+    0
+FROM banco.medicamento AS m
+CROSS JOIN banco.cuidado AS c
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM banco.prescricao AS p
+    WHERE p.medicamento_medicamento_id = m.medicamento_id
+      AND p.cuidado_cuidado_id = c.cuidado_id
+      AND p.cuidado_fk_pessoa_paciente = c.fk_pessoa_paciente
+      AND p.cuidado_fk_pessoa_cuidador = c.fk_pessoa_cuidador
+)
+ORDER BY m.medicamento_id, c.cuidado_id
+LIMIT 15;

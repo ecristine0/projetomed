@@ -67,7 +67,7 @@ while ($p = $prescricoes->fetch_assoc()) {
         </button>
 
         <button type="submit" name="tomou" value="0">
-            NÃO
+        
         </button>
 
         <input type="hidden" name="marcar" value="1">
